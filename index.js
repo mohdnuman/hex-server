@@ -2,6 +2,7 @@ const axios = require("axios");
 const Web3 = require("web3");
 const { createWriteStream } = require('fs');
 const limit = 20;
+let config=require("./config.json");
 
 const apiCall = (address, page) => `https://api.scanmydefi.com/address/${address}/transactions?limit=${limit}&page=${page}`
 
@@ -99,7 +100,8 @@ async function getDataFromTxnHash() { //MAIN function
         try {
             let count=0;
             let flag=true;
-            let page=66231;
+            let page=config.page;
+            console.log("Attempting to start server from page no.",page);
             while(flag){
                 if(count%3000==0){
                     postUpdate(count);
